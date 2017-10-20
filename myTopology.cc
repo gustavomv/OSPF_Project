@@ -1,6 +1,7 @@
 #include "ns3/network-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/point-to-point-module.h"
+#include "ns3/core-module.h"
 
 using namespace ns3;
 
@@ -158,6 +159,10 @@ int main(int arg, char *argv[]){
  Ipv4InterfaceContainer subnetIJ_Interfaces = address.Assign(subnetIJ_Devices);
 
 //------------------------------------------------------------------------------------------------
+
+
+ Simulator::Run();
+ Simulator::Destroy();
 
  return 0;
 }
