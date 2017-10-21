@@ -432,16 +432,16 @@ int main(int argc, char *argv[]){
  mobility.Install(routers);
 
  AnimationInterface anim("myTopology_animation.xml");
- anim.SetConstantPosition(routers.Get(0), 0.0, 15.0);
- anim.SetConstantPosition(routers.Get(1), 2.0, 8.0);
- anim.SetConstantPosition(routers.Get(2), 4.0, 8.0);
- anim.SetConstantPosition(routers.Get(3), 6.0, 8.0);
- anim.SetConstantPosition(routers.Get(4), 8.0, 8.0);
- anim.SetConstantPosition(routers.Get(5), 10.0, 8.0);
- anim.SetConstantPosition(routers.Get(6), 12.0, 8.0);
- anim.SetConstantPosition(routers.Get(7), 14.0, 8.0);
- anim.SetConstantPosition(routers.Get(8), 16.0, 8.0);
- anim.SetConstantPosition(routers.Get(9), 18.0, 8.0);
+ anim.SetConstantPosition(routers.Get(0), 2.0, 5.0);
+ anim.SetConstantPosition(routers.Get(1), 7.0, 3.0);
+ anim.SetConstantPosition(routers.Get(2), 13.0, 2.5);
+ anim.SetConstantPosition(routers.Get(3), 18.0, 4.0);
+ anim.SetConstantPosition(routers.Get(4), 3.0, 10.0);
+ anim.SetConstantPosition(routers.Get(5), 8.0, 7.5);
+ anim.SetConstantPosition(routers.Get(6), 14.5, 6.0);
+ anim.SetConstantPosition(routers.Get(7), 18.5, 9.0);
+ anim.SetConstantPosition(routers.Get(8), 10.0, 12.0);
+ anim.SetConstantPosition(routers.Get(9), 16.0, 13.0);
 
 /************************************************************************************************/
  Simulator::Stop(Seconds (10.0));
