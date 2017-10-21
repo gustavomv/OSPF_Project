@@ -160,7 +160,6 @@ int main(int argc, char *argv[]){
  Time Delay_AB(delayAB);
 
  NetDeviceContainer subnetAB_Devices = p2p.Install(subnetAB);
-
  address.SetBase("10.1.1.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetAB_Interfaces = address.Assign(subnetAB_Devices);
@@ -179,7 +178,6 @@ int main(int argc, char *argv[]){
  Time Delay_AE(delayAE);
 
  NetDeviceContainer subnetAE_Devices = p2p.Install(subnetAE); 
-
  address.SetBase("10.1.2.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetAE_Interfaces = address.Assign(subnetAE_Devices);
@@ -252,7 +250,6 @@ int main(int argc, char *argv[]){
  Time Delay_CG(delayCG);
 
  NetDeviceContainer subnetCG_Devices = p2p.Install(subnetCG);
-
  address.SetBase("10.1.6.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetCG_Interfaces = address.Assign(subnetCG_Devices);
