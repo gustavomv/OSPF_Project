@@ -2,6 +2,7 @@
 #include "ns3/internet-module.h"
 #include "ns3/point-to-point-module.h"
 #include "ns3/core-module.h"
+#include "ns3/applications-module.h"
 
 using namespace ns3;
 
@@ -146,7 +147,7 @@ int main(int argc, char *argv[]){
  std::cout << "SubnetHJ_Delay = " << delayHJ << std::endl;
 
  std::cout << "\nSubnetIJ_Rate = " << speedIJ << std::endl;
- std::cout << "SubnetIJ_Delay = " << delayIJ << std::endl;
+ std::cout << "SubnetIJ_Delay = " << delayIJ << "\n" << std::endl;
 
 /*----------------------------------------------------------------------------------------------*/
  NodeContainer subnetAB;
@@ -405,8 +406,26 @@ int main(int argc, char *argv[]){
 
 //------------------------------------------------------------------------------------------------
 
+ Ipv4Address serverAddress(subnetAB_Interfaces.GetAddress(0));
+ uint16_t serverPort = 4500;
 
+ UdpEchoServerHelper server(serverPort);
+ 
+ ApplicationContainer serverApp = server.Install(routers.Get(0));
+ serverApp.Start(Seconds(1.0));
+ serverApp.Stop(Seconds(10.0));
 
+ UdpEchoClientHelper HostEcho(serverAddress, serverPort);
+
+ ApplicationContainer HostEchoApp = HostEcho.Install(routers.Get(1));
+ HostEchoApp.Start(Seconds(1.0));
+ HostEchoApp.Stop(Seconds(10.0));
+
+ Time::SetResolution (Time::NS);
+ LogComponentEnable ("UdpEchoClientApplication", LOG_LEVEL_INFO);
+ LogComponentEnable ("UdpEchoServerApplication", LOG_LEVEL_INFO);
+
+ Simulator::Stop (Seconds (10.0));
  Simulator::Run();
  Simulator::Destroy();
 }
