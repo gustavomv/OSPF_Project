@@ -159,9 +159,8 @@ int main(int argc, char *argv[]){
  Time Delay_AB(delayAB);
 
  NetDeviceContainer subnetAB_Devices = p2p.Install(subnetAB);
-
  address.SetBase("10.1.1.0", "255.255.255.0");
-
+ 
  Ipv4InterfaceContainer subnetAB_Interfaces = address.Assign(subnetAB_Devices);
 
  Config::Set("/NodeList/0/DeviceList/0/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AB));
