@@ -17,16 +17,22 @@ int main(int argc, char *argv[]){
  
  Ipv4AddressHelper address;
 
- std::string speed = "10Mbps";
- std::string delay = "5ms";
+ std::string speedAB = "10Mbps";
+ std::string delayAB = "5ms";
+
+ DataRate Speed(speedAB);
+ Time  Delay(delayAB);
 
  CommandLine cmd;
- //cmd.AddValue("SubnetRate", "Taxa de bits por segundo no canal", speed);
- //cmd.AddValue("SubnetDelay", "Tempo de atraso no canal", delay);
+ cmd.AddValue("SubnetAB_Rate", "Taxa de bits por segundo no canal", speedAB);
+ cmd.AddValue("SubnetAB_Delay", "Tempo de atraso no canal", delayAB);
  cmd.Parse(argc, argv);
 
- std::cout << "SubnetRate =" << speed << std::endl;
- std::cout << "SubnetDelay =" << delay << std::endl;
+ std::cout << "SubnetAB_Rate = " << speedAB << std::endl;
+ std::cout << "SubnetAB_Delay = " << delayAB << std::endl;
+
+ Config::SetDefault("ns3::PointToPointNetDevice::DataRate", DataRateValue(Speed));
+ Config::SetDefault("ns3::PointToPointChannel::Delay", TimeValue(Delay));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetAB;
