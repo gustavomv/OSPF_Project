@@ -17,32 +17,79 @@ int main(int argc, char *argv[]){
  
  Ipv4AddressHelper address;
 
+/*----------------------------------------------------------------------------------------------*/
  std::string speedAB = "10Mbps";
- std::string delayAB = "5ms";
+ std::string delayAB = "4ms";
 
- DataRate Speed(speedAB);
- Time  Delay(delayAB);
+ std::string speedAE = "20Mbps";
+ std::string delayAE = "5ms";
+
+ std::string speedBC = "30Mbps";
+ std::string delayBC = "6ms";
+
+ std::string speedBF = "40Mbps";
+ std::string delayBF = "7ms";
+
+ std::string speedCD = "50Mbps";
+ std::string delayCD = "8ms";
+
+ std::string speedCG = "60Mbps";
+ std::string delayCG = "9ms";
 
  CommandLine cmd;
  cmd.AddValue("SubnetAB_Rate", "Taxa de bits por segundo no canal", speedAB);
  cmd.AddValue("SubnetAB_Delay", "Tempo de atraso no canal", delayAB);
+
+ cmd.AddValue("SubnetAE_Rate", "Taxa de bits por segundo no canal", speedAE);
+ cmd.AddValue("SubnetAE_Delay", "Tempo de atraso no canal", delayAE);
+
+ cmd.AddValue("SubnetBC_Rate", "Taxa de bits por segundo no canal", speedBC);
+ cmd.AddValue("SubnetBC_Delay", "Tempo de atraso no canal", delayBC);
+
+ cmd.AddValue("SubnetBF_Rate", "Taxa de bits por segundo no canal", speedBF);
+ cmd.AddValue("SubnetBF_Delay", "Tempo de atraso no canal", delayBF);
+
+ cmd.AddValue("SubnetCD_Rate", "Taxa de bits por segundo no canal", speedCD);
+ cmd.AddValue("SubnetCD_Delay", "Tempo de atraso no canal", delayCD);
+
+ cmd.AddValue("SubnetCG_Rate", "Taxa de bits por segundo no canal", speedCG);
+ cmd.AddValue("SubnetCG_Delay", "Tempo de atraso no canal", delayCG); 
  cmd.Parse(argc, argv);
 
- std::cout << "SubnetAB_Rate = " << speedAB << std::endl;
+ std::cout << "\nSubnetAB_Rate = " << speedAB << std::endl;
  std::cout << "SubnetAB_Delay = " << delayAB << std::endl;
 
- Config::SetDefault("ns3::PointToPointNetDevice::DataRate", DataRateValue(Speed));
- Config::SetDefault("ns3::PointToPointChannel::Delay", TimeValue(Delay));
+ std::cout << "\nSubnetAE_Rate = " << speedAE << std::endl;
+ std::cout << "SubnetAE_Delay = " << delayAE << std::endl;
 
-//------------------------------------------------------------------------------------------------
+ std::cout << "\nSubnetBC_Rate = " << speedBC << std::endl;
+ std::cout << "SubnetBC_Delay = " << delayBC << std::endl;
+ 
+ std::cout << "\nSubnetBF_Rate = " << speedBF << std::endl;
+ std::cout << "SubnetBF_Delay = " << delayBF << std::endl;
+ 
+ std::cout << "\nSubnetCD_Rate = " << speedCD << std::endl;
+ std::cout << "SubnetCD_Delay = " << delayCD << std::endl;
+
+ std::cout << "\nSubnetCG_Rate = " << speedCG << std::endl;
+ std::cout << "SubnetCG_Delay = " << delayCG << std::endl;
+/*----------------------------------------------------------------------------------------------*/
  NodeContainer subnetAB;
  subnetAB.Add(routers.Get(0));
  subnetAB.Add(routers.Get(1));
+
+ DataRate Speed_AB(speedAB);
+ Time Delay_AB(delayAB);
 
  NetDeviceContainer subnetAB_Devices = p2p.Install(subnetAB); 
  address.SetBase("10.1.1.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetAB_Interfaces = address.Assign(subnetAB_Devices);
+
+ Config::Set("/NodeList/0/DeviceList/0/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AB));
+Config::Set("/NodeList/1/DeviceList/1/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AB));
+
+Config::Set("/ChannelList/0/$ns3::PointToPointChannel/Delay", TimeValue(Delay_AB));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetAE;
