@@ -183,7 +183,7 @@ int main(int argc, char *argv[]){
  Config::Set("/NodeList/2/DeviceList/10/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_CG));
  Config::Set("/NodeList/6/DeviceList/11/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_CG));
 
- Config::Set("/ChannelList/1/$ns3::PointToPointChannel/Delay", TimeValue(Delay_CG));
+ Config::Set("/ChannelList/5/$ns3::PointToPointChannel/Delay", TimeValue(Delay_CG));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetDH; 
