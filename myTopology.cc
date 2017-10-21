@@ -73,6 +73,7 @@ int main(int argc, char *argv[]){
 
  std::cout << "\nSubnetCG_Rate = " << speedCG << std::endl;
  std::cout << "SubnetCG_Delay = " << delayCG << std::endl;
+
 /*----------------------------------------------------------------------------------------------*/
  NodeContainer subnetAB;
  subnetAB.Add(routers.Get(0));
@@ -81,65 +82,108 @@ int main(int argc, char *argv[]){
  DataRate Speed_AB(speedAB);
  Time Delay_AB(delayAB);
 
- NetDeviceContainer subnetAB_Devices = p2p.Install(subnetAB); 
+ NetDeviceContainer subnetAB_Devices = p2p.Install(subnetAB);
+
  address.SetBase("10.1.1.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetAB_Interfaces = address.Assign(subnetAB_Devices);
 
  Config::Set("/NodeList/0/DeviceList/0/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AB));
-Config::Set("/NodeList/1/DeviceList/1/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AB));
+ Config::Set("/NodeList/1/DeviceList/1/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AB));
 
-Config::Set("/ChannelList/0/$ns3::PointToPointChannel/Delay", TimeValue(Delay_AB));
+ Config::Set("/ChannelList/0/$ns3::PointToPointChannel/Delay", TimeValue(Delay_AB));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetAE;
  subnetAE.Add(routers.Get(0));
  subnetAE.Add(routers.Get(4));
 
+ DataRate Speed_AE(speedAE);
+ Time Delay_AE(delayAE);
+
  NetDeviceContainer subnetAE_Devices = p2p.Install(subnetAE); 
+
  address.SetBase("10.1.2.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetAE_Interfaces = address.Assign(subnetAE_Devices);
+
+ Config::Set("/NodeList/0/DeviceList/2/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AE));
+ Config::Set("/NodeList/4/DeviceList/3/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AE));
+
+ Config::Set("/ChannelList/1/$ns3::PointToPointChannel/Delay", TimeValue(Delay_AE));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetBC;
  subnetBC.Add(routers.Get(1));
  subnetBC.Add(routers.Get(2));
 
+ DataRate Speed_BC(speedBC);
+ Time Delay_BC(delayBC);
+
  NetDeviceContainer subnetBC_Devices = p2p.Install(subnetBC);
  address.SetBase("10.1.3.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetBC_Interfaces = address.Assign(subnetBC_Devices);
+
+ Config::Set("/NodeList/1/DeviceList/4/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_BC));
+ Config::Set("/NodeList/2/DeviceList/5/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_BC));
+
+ Config::Set("/ChannelList/2/$ns3::PointToPointChannel/Delay", TimeValue(Delay_BC));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetBF;
  subnetBF.Add(routers.Get(1));
  subnetBF.Add(routers.Get(5));
 
+ DataRate Speed_BF(speedBF);
+ Time Delay_BF(delayBF);
+
  NetDeviceContainer subnetBF_Devices = p2p.Install(subnetBF);
  address.SetBase("10.1.4.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetBF_Interfaces = address.Assign(subnetBF_Devices);
+
+ Config::Set("/NodeList/1/DeviceList/6/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_BF));
+ Config::Set("/NodeList/5/DeviceList/7/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_BF));
+
+ Config::Set("/ChannelList/3/$ns3::PointToPointChannel/Delay", TimeValue(Delay_BF));
 
 //------------------------------------------------------------------------------------------------ 
  NodeContainer subnetCD; 
  subnetCD.Add(routers.Get(2));
  subnetCD.Add(routers.Get(3));
 
+ DataRate Speed_CD(speedCD);
+ Time Delay_CD(delayCD);
+
  NetDeviceContainer subnetCD_Devices = p2p.Install(subnetCD);
  address.SetBase("10.1.5.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetCD_Interfaces = address.Assign(subnetCD_Devices);
+
+ Config::Set("/NodeList/2/DeviceList/8/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_CD));
+ Config::Set("/NodeList/3/DeviceList/9/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_CD));
+
+ Config::Set("/ChannelList/4/$ns3::PointToPointChannel/Delay", TimeValue(Delay_BF));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetCG; 
  subnetCG.Add(routers.Get(2));
  subnetCG.Add(routers.Get(6));
 
+ DataRate Speed_CG(speedCG);
+ Time Delay_CG(delayCG);
+
  NetDeviceContainer subnetCG_Devices = p2p.Install(subnetCG);
+
  address.SetBase("10.1.6.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetCG_Interfaces = address.Assign(subnetCG_Devices);
+
+ Config::Set("/NodeList/2/DeviceList/10/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_CG));
+ Config::Set("/NodeList/6/DeviceList/11/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_CG));
+
+ Config::Set("/ChannelList/1/$ns3::PointToPointChannel/Delay", TimeValue(Delay_CG));
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetDH; 
