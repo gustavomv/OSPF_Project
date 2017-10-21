@@ -4,6 +4,7 @@
 #include "ns3/core-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/netanim-module.h"
+#include "ns3/mobility-module.h"
 
 using namespace ns3;
 
@@ -159,8 +160,9 @@ int main(int argc, char *argv[]){
  Time Delay_AB(delayAB);
 
  NetDeviceContainer subnetAB_Devices = p2p.Install(subnetAB);
+
  address.SetBase("10.1.1.0", "255.255.255.0");
- 
+
  Ipv4InterfaceContainer subnetAB_Interfaces = address.Assign(subnetAB_Devices);
 
  Config::Set("/NodeList/0/DeviceList/0/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_AB));
@@ -177,6 +179,7 @@ int main(int argc, char *argv[]){
  Time Delay_AE(delayAE);
 
  NetDeviceContainer subnetAE_Devices = p2p.Install(subnetAE); 
+
  address.SetBase("10.1.2.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetAE_Interfaces = address.Assign(subnetAE_Devices);
@@ -249,6 +252,7 @@ int main(int argc, char *argv[]){
  Time Delay_CG(delayCG);
 
  NetDeviceContainer subnetCG_Devices = p2p.Install(subnetCG);
+
  address.SetBase("10.1.6.0", "255.255.255.0");
 
  Ipv4InterfaceContainer subnetCG_Interfaces = address.Assign(subnetCG_Devices);
@@ -415,17 +419,21 @@ int main(int argc, char *argv[]){
 
  UdpEchoClientHelper HostEcho(serverAddress, serverPort);
 
- ApplicationContainer HostEchoApp = HostEcho.Install(routers.Get(7));
+ ApplicationContainer HostEchoApp = HostEcho.Install(routers.Get(9));
  HostEchoApp.Start(Seconds(1.0));
  HostEchoApp.Stop(Seconds(10.0));
 
  Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
- Time::SetResolution (Time::NS);
- LogComponentEnable ("UdpEchoClientApplication", LOG_LEVEL_INFO);
- LogComponentEnable ("UdpEchoServerApplication", LOG_LEVEL_INFO);
+ Time::SetResolution(Time::NS);
+ LogComponentEnable("UdpEchoClientApplication", LOG_LEVEL_INFO);
+ LogComponentEnable("UdpEchoServerApplication", LOG_LEVEL_INFO);
 
-/*
+/************************************************************************************************/
+ MobilityHelper mobility;
+ mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel");
+ mobility.Install(routers);
+
  AnimationInterface anim("myTopology_animation.xml");
  anim.SetConstantPosition(routers.Get(0), 0.0, 15.0);
  anim.SetConstantPosition(routers.Get(1), 2.0, 8.0);
@@ -437,9 +445,9 @@ int main(int argc, char *argv[]){
  anim.SetConstantPosition(routers.Get(7), 14.0, 8.0);
  anim.SetConstantPosition(routers.Get(8), 16.0, 8.0);
  anim.SetConstantPosition(routers.Get(9), 18.0, 8.0);
-*/
 
- Simulator::Stop (Seconds (10.0));
+/************************************************************************************************/
+ Simulator::Stop(Seconds (10.0));
  Simulator::Run();
  Simulator::Destroy();
 
