@@ -3,6 +3,7 @@
 #include "ns3/point-to-point-module.h"
 #include "ns3/core-module.h"
 #include "ns3/applications-module.h"
+#include "ns3/netanim-module.h"
 
 using namespace ns3;
 
@@ -404,7 +405,7 @@ int main(int argc, char *argv[]){
 
  Config::Set("/ChannelList/13/$ns3::PointToPointChannel/Delay", TimeValue(Delay_IJ));
 
-//------------------------------------------------------------------------------------------------
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
  Ipv4Address serverAddress(subnetAB_Interfaces.GetAddress(0));
  uint16_t serverPort = 4500;
@@ -417,15 +418,32 @@ int main(int argc, char *argv[]){
 
  UdpEchoClientHelper HostEcho(serverAddress, serverPort);
 
- ApplicationContainer HostEchoApp = HostEcho.Install(routers.Get(1));
+ ApplicationContainer HostEchoApp = HostEcho.Install(routers.Get(7));
  HostEchoApp.Start(Seconds(1.0));
  HostEchoApp.Stop(Seconds(10.0));
+
+ Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
  Time::SetResolution (Time::NS);
  LogComponentEnable ("UdpEchoClientApplication", LOG_LEVEL_INFO);
  LogComponentEnable ("UdpEchoServerApplication", LOG_LEVEL_INFO);
 
+/*
+ AnimationInterface anim("myTopology_animation.xml");
+ anim.SetConstantPosition(routers.Get(0), 0.0, 15.0);
+ anim.SetConstantPosition(routers.Get(1), 2.0, 8.0);
+ anim.SetConstantPosition(routers.Get(2), 4.0, 8.0);
+ anim.SetConstantPosition(routers.Get(3), 6.0, 8.0);
+ anim.SetConstantPosition(routers.Get(4), 8.0, 8.0);
+ anim.SetConstantPosition(routers.Get(5), 10.0, 8.0);
+ anim.SetConstantPosition(routers.Get(6), 12.0, 8.0);
+ anim.SetConstantPosition(routers.Get(7), 14.0, 8.0);
+ anim.SetConstantPosition(routers.Get(8), 16.0, 8.0);
+ anim.SetConstantPosition(routers.Get(9), 18.0, 8.0);
+*/
+
  Simulator::Stop (Seconds (10.0));
  Simulator::Run();
  Simulator::Destroy();
+
 }
