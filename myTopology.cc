@@ -5,7 +5,7 @@
 
 using namespace ns3;
 
-int main(int arg, char *argv[]){
+int main(int argc, char *argv[]){
  
  NodeContainer routers;
  routers.Create(10);
@@ -14,9 +14,19 @@ int main(int arg, char *argv[]){
  stack.Install(routers);
 
  PointToPointHelper p2p;
- p2p.Install(routers);
-
+ 
  Ipv4AddressHelper address;
+
+ std::string speed = "10Mbps";
+ std::string delay = "5ms";
+
+ CommandLine cmd;
+ //cmd.AddValue("SubnetRate", "Taxa de bits por segundo no canal", speed);
+ //cmd.AddValue("SubnetDelay", "Tempo de atraso no canal", delay);
+ cmd.Parse(argc, argv);
+
+ std::cout << "SubnetRate =" << speed << std::endl;
+ std::cout << "SubnetDelay =" << delay << std::endl;
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetAB;
@@ -30,8 +40,8 @@ int main(int arg, char *argv[]){
 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetAE;
- subnetAB.Add(routers.Get(0));
- subnetAB.Add(routers.Get(4));
+ subnetAE.Add(routers.Get(0));
+ subnetAE.Add(routers.Get(4));
 
  NetDeviceContainer subnetAE_Devices = p2p.Install(subnetAE); 
  address.SetBase("10.1.2.0", "255.255.255.0");
@@ -161,8 +171,7 @@ int main(int arg, char *argv[]){
 //------------------------------------------------------------------------------------------------
 
 
+
  Simulator::Run();
  Simulator::Destroy();
-
- return 0;
 }
