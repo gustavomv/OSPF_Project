@@ -404,7 +404,6 @@ int main(int argc, char *argv[]){
  Config::Set("/ChannelList/13/$ns3::PointToPointChannel/Delay", TimeValue(Delay_IJ));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-
  Ipv4Address serverAddress(subnetAB_Interfaces.GetAddress(0));
  uint16_t serverPort = 4500;
 
@@ -447,5 +446,4 @@ int main(int argc, char *argv[]){
  Simulator::Stop(Seconds (10.0));
  Simulator::Run();
  Simulator::Destroy();
-
 }
