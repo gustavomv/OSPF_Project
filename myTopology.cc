@@ -438,6 +438,7 @@ int main(int argc, char *argv[]){
  Config::Set("/NodeList/9/DeviceList/28/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_IJ));
 
  Config::Set("/ChannelList/14/$ns3::PointToPointChannel/Delay", TimeValue(Delay_IJ));
+ 
 //------------------------------------------------------------------------------------------------
  NodeContainer subnetKD; 
  subnetKD.Add(routers.Get(10));
@@ -455,6 +456,7 @@ int main(int argc, char *argv[]){
  Config::Set("/NodeList/3/DeviceList/30/$ns3::PointToPointNetDevice/DataRate", DataRateValue(Speed_KD));
 
  Config::Set("/ChannelList/15/$ns3::PointToPointChannel/Delay", TimeValue(Delay_KD));
+ 
 //////////////////////////////////////////////////////////////////////////////////////////////////
  Ipv4Address serverAddress(subnetAB_Interfaces.GetAddress(0));
  uint16_t serverPort = 4500;
